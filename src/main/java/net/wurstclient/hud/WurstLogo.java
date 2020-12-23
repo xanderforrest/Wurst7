@@ -40,13 +40,13 @@ public final class WurstLogo
 		}else
 			GL11.glColor4f(1, 1, 1, 0.5F);
 		
-		drawQuads(0, 6, tr.getWidth(version) + 76, 17);
+		drawQuads(0, 6, tr.getWidth(version) + 26, 17);
 		
 		// draw version string
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		GL11.glEnable(GL11.GL_CULL_FACE);
 		GL11.glDisable(GL11.GL_DEPTH_TEST);
-		tr.draw(matrixStack, version, 74, 8, 0xFF000000);
+		tr.draw(matrixStack, version, 24, 8, 0xFF000000);
 		
 		// draw Wurst logo
 		GL11.glColor4f(1, 1, 1, 1);
@@ -59,9 +59,6 @@ public final class WurstLogo
 	{
 		String version = "v" + WurstClient.VERSION;
 		version += " MC" + WurstClient.MC_VERSION;
-		
-		if(WurstClient.INSTANCE.getUpdater().isOutdated())
-			version += " (outdated)";
 		
 		return version;
 	}

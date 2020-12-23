@@ -45,7 +45,6 @@ import net.wurstclient.navigator.Navigator;
 import net.wurstclient.other_feature.OtfList;
 import net.wurstclient.other_feature.OtherFeature;
 import net.wurstclient.settings.SettingsFile;
-import net.wurstclient.update.WurstUpdater;
 import net.wurstclient.util.json.JsonException;
 
 public enum WurstClient
@@ -75,7 +74,6 @@ public enum WurstClient
 	
 	private boolean enabled = true;
 	private static boolean guiInitialized;
-	private WurstUpdater updater;
 	private Path wurstFolder;
 	
 	private KeyBinding zoomKey;
@@ -85,10 +83,6 @@ public enum WurstClient
 		System.out.println("Starting Wurst Client...");
 		
 		wurstFolder = createWurstFolder();
-		
-		String trackingID = "UA-52838431-5";
-		String hostname = "client.wurstclient.net";
-		Path analyticsFile = wurstFolder.resolve("analytics.json");
 		
 		eventManager = new EventManager(this);
 		
@@ -131,9 +125,7 @@ public enum WurstClient
 		rotationFaker = new RotationFaker();
 		eventManager.add(PreMotionListener.class, rotationFaker);
 		eventManager.add(PostMotionListener.class, rotationFaker);
-		
-		updater = new WurstUpdater();
-		eventManager.add(UpdateListener.class, updater);
+
 		
 		Path altsFile = wurstFolder.resolve("alts.encrypted_json");
 		Path encFolder = createEncryptionFolder();
@@ -321,12 +313,7 @@ public enum WurstClient
 			hax.panicHack.onUpdate();
 		}
 	}
-	
-	public WurstUpdater getUpdater()
-	{
-		return updater;
-	}
-	
+
 	public Path getWurstFolder()
 	{
 		return wurstFolder;
